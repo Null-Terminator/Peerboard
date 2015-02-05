@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,6 +25,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nullterminator.peerboard.R;
 import java.io.UnsupportedEncodingException;
@@ -284,6 +286,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+			
+			if (veriPIN == -1){
+				Context context = getApplicationContext();
+				CharSequence text = "Email invalid/not registered";
+				int duration = Toast.LENGTH_LONG;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
+			}
 
 
             //Rayun: code for database communication
