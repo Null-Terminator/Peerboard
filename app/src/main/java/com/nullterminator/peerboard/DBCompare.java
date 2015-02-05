@@ -15,6 +15,7 @@ public class DBCompare {
         String uSalt = "";
         String uPwd = "";
         int uVeriPIN = -1;
+        //This is a test comment
 
 
         Connection conn 	= null;
