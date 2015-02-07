@@ -287,7 +287,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 e.printStackTrace();
             }
 			
-			if (veriPIN == -1){
+			if (veriPIN == -2){
 				Context context = getApplicationContext();
 				CharSequence text = "Email invalid/not registered";
 				int duration = Toast.LENGTH_LONG;
