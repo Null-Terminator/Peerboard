@@ -144,6 +144,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+			try {
+				Context context = getApplicationContext();
+				CharSequence text = "Will attempt jdbc now";
+				int duration = Toast.LENGTH_LONG;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
@@ -270,16 +280,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             String pwd = "";
             int veriPIN = 0;
 			
-			try {
-				Context context = getApplicationContext();
-				CharSequence text = "Will attempt jdbc now";
-				int duration = Toast.LENGTH_LONG;
-
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 
             // TODO: attempt authentication against a network service.
             try {
@@ -331,6 +332,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
+			//TODO: need to understand this part and write the post execute part.
 
             if (success) {
                 finish();
