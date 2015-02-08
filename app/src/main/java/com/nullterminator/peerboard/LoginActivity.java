@@ -269,6 +269,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             String pword;
             String pwd = "";
             int veriPIN = 0;
+			
+			try {
+				Context context = getApplicationContext();
+				CharSequence text = "Will attempt jdbc now";
+				int duration = Toast.LENGTH_LONG;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
             // TODO: attempt authentication against a network service.
             try {
@@ -287,14 +298,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 e.printStackTrace();
             }
 			
-			if (veriPIN == -2){
+			try {
+				if (veriPIN == -1){
 				Context context = getApplicationContext();
 				CharSequence text = "Email invalid/not registered";
 				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+			
 
 
             //Rayun: code for database communication
