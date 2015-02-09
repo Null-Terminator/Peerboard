@@ -39,7 +39,8 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
-
+	int veriPIN = 0;
+	String name = "";
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -278,7 +279,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             String salt;
             String pword;
             String pwd = "";
-            int veriPIN = 0;
 			
 			
 
@@ -286,7 +286,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 salt = Sha1Hash.SHA1(mEmail);
                 pword = Sha1Hash.SHA1(mPassword);
-                pwd = Sha1Hash.SHA1(salt + pword);
+				pwd = salt + pword;
+                //pwd = Sha1Hash.SHA1(salt + pword);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
@@ -300,13 +301,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 			
 			try {
-				if (veriPIN == -1){
-				Context context = getApplicationContext();
-				CharSequence text = "Email invalid/not registered";
-				int duration = Toast.LENGTH_LONG;
-
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
+				if ((veriPIN == -1)||(veriPIN == -2)){
+					return false;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -335,8 +331,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			//TODO: need to understand this part and write the post execute part.
 
             if (success) {
+				Context context = getApplicationContext();
+				CharSequence text = "Successfully logged in, PIN = " + veriPIN;
+				int duration = Toast.LENGTH_LONG;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
                 finish();
             } else {
+				Context context = getApplicationContext();
+				CharSequence text = "Email invalid/not registered " + veriPIN;
+				int duration = Toast.LENGTH_LONG;
+
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

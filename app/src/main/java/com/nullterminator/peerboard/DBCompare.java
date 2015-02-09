@@ -1,6 +1,9 @@
 package com.nullterminator.peerboard;
 
 import java.sql.*;
+import oracle.*;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 
 public class DBCompare {
@@ -14,7 +17,7 @@ public class DBCompare {
         String uLName = "";
         String uSalt = "";
         String uPwd = "";
-        int uVeriPIN = -1;
+        int uVeriPIN = -3;
         //This is a test comment
 
 
@@ -42,6 +45,12 @@ public class DBCompare {
                 uVeriPIN    = rs.getInt("VERIPIN");
             }
         }
+		
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+			return -4;
+		}
 
         catch (SQLException se)
         {
@@ -72,16 +81,25 @@ public class DBCompare {
             return -1;
         }
 
+        try {
+			String dbpwd = uSalt + uPwd;
+			//String dbpwd = Sha1Hash.SHA1(uSalt + uPwd);
+			if(dbpwd != pwd){
+				//#TODO: Send back saying wrong password
+				return -2;
+			}
+		} catch (/*NoSuchAlgorithm*/Exception e) {
+			e.printStackTrace();
+		} /*catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}*/
+		
+
         if(uVeriPIN != 0){
             //#TODO: Send them to verification page
             return uVeriPIN;
         }
 
-        String dbpwd = uSalt + uPwd;
-        if(dbpwd != pwd){
-            //#TODO: Send back saying wrong password
-            return -2;
-        }
         //#TODO: Successful login, handle it at activity_login
 		return 0;
     }
