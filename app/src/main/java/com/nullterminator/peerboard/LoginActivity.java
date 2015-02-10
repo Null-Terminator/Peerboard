@@ -148,7 +148,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			try {
 				Context context = getApplicationContext();
 				CharSequence text = "Will attempt jdbc now";
-				int duration = Toast.LENGTH_LONG;
+				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
@@ -332,7 +332,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             if (success) {
 				Context context = getApplicationContext();
 				CharSequence text = "Successfully logged in, PIN = " + veriPIN;
-				int duration = Toast.LENGTH_LONG;
+				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
@@ -340,7 +340,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             } else {
 				Context context = getApplicationContext();
 				CharSequence text = "Email invalid/not registered " + veriPIN;
-				int duration = Toast.LENGTH_LONG;
+				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
