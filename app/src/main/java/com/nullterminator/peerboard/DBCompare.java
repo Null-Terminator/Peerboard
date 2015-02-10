@@ -82,9 +82,8 @@ public class DBCompare {
         }
 
         try {
-			String dbpwd = uSalt + uPwd;
-			//String dbpwd = Sha1Hash.SHA1(uSalt + uPwd);
-			if(dbpwd != pwd){
+			String dbpwd = Sha1Hash.SHA1(uSalt + uPwd);
+			if(!dbpwd.equals(pwd)){
 				//#TODO: Send back saying wrong password
 				return -2;
 			}

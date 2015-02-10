@@ -286,8 +286,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 salt = Sha1Hash.SHA1(mEmail);
                 pword = Sha1Hash.SHA1(mPassword);
-				pwd = salt + pword;
-                //pwd = Sha1Hash.SHA1(salt + pword);
+                pwd = Sha1Hash.SHA1(salt + pword);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
