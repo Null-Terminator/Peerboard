@@ -4,6 +4,7 @@ import java.sql.*;
 import oracle.*;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 
 public class DBCompare {
@@ -104,7 +105,7 @@ public class DBCompare {
 		return 0;
     }
 	
-	public static int userRegister(String fname, String lname, String email, String pwd) throws SQLException {
+	public static int userRegister(String fname, String lname, String email, String salt, String pword) throws SQLException {
         Connection conn 	= null;
         try
         {
@@ -116,17 +117,39 @@ public class DBCompare {
 			Statement stmt 			= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs			= stmt.executeQuery(query1);
 			int u_id = 0;
+			int count = 0;;
+			int veriPIN = rand
 			
 			while (rs.next())
 			{
 				u_id		= rs.getInt("max") + 1;
 			}
+			
+			String query2			= "SELECT COUNT(*) c FROM users WHERE EMAIL = ?";
+			Statement stmt2			= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs2			= stmt2.executeQuery(query2);
+			
+			while (rs2.next())
+			{
+				count		= rs2.getInt("c");
+			}
+			
+			if (count != 0){
+				return -1;
+				//TODO: Go back to SignUpActivity and set -1 to the corresponding error
+			}
 
-            String insrt	        = "INSERT INTO users (U_ID, EMAIL, FNAME, LNAME, SALT, PWD, VERIPIN) WHERE email = ?";
-            PreparedStatement stmt2 	= conn.prepareStatement(insrt);
-            stmt2.setString(1, email);
+            String insrt	        = "INSERT INTO users (U_ID, EMAIL, FNAME, LNAME, SALT, PWD, VERIPIN) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt3 	= conn.prepareStatement(insrt);
+            stmt3.setInt(1, u_id);
+			stmt3.setString(2, email);
+			stmt3.setString(3, fname);
+			stmt3.setString(4, lname);
+			stmt3.setString(5, salt);
+			stmt3.setString(6, pword);
 
-            stmt2.executeUpdate();
+            stmt3.executeUpdate();
+			conn.commit();
         }
 
 		catch (ClassNotFoundException e)

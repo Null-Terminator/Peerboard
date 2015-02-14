@@ -309,7 +309,6 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
         protected Boolean doInBackground(Void... params) {
             String salt;
             String pword;
-            String pwd = "";
 
 
 
@@ -317,7 +316,6 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
             try {
                 salt = Sha1Hash.SHA1(mEmail);
                 pword = Sha1Hash.SHA1(mPassword);
-                pwd = Sha1Hash.SHA1(salt + pword);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
@@ -325,7 +323,7 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
             }
 
             try {
-                veriPIN = DBCompare.userRegister(mFName, mLName, mEmail, pwd);
+                veriPIN = DBCompare.userRegister(mFName, mLName, mEmail, salt, pword);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -386,8 +384,4 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
             showProgress(false);
         }
     }
-}
-
-public class SignUpActivity
-{
 }
