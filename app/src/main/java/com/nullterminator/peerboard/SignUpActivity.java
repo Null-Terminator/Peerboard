@@ -39,7 +39,7 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> {
-	int veriPIN = 0;
+	int reg = 0;
 	String name = "";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -307,8 +307,8 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            String salt;
-            String pword;
+            String salt = "";
+            String pword = "";
 
 
 
@@ -323,13 +323,13 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
             }
 
             try {
-                veriPIN = DBCompare.userRegister(mFName, mLName, mEmail, salt, pword);
+                reg = DBCompare.userRegister(mFName, mLName, mEmail, salt, pword);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
 			try {
-				if ((veriPIN == -1)||(veriPIN == -2)){
+				if ((reg == -1)||(reg == -4)){
 					return false;
 				}
 			} catch (Exception e) {
@@ -360,7 +360,7 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
 
             if (success) {
 				Context context = getApplicationContext();
-				CharSequence text = "Successfully logged in, PIN = " + veriPIN;
+				CharSequence text = "Successfully registered!";
 				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
@@ -368,13 +368,14 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
                 finish();
             } else {
 				Context context = getApplicationContext();
-				CharSequence text = "Email invalid/not registered " + veriPIN;
+				CharSequence text = "Email is already registered, please login";
 				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                mEmailView.setError(getString(R.string.error_email_existing));
+                mEmailView.requestFocus();
+				//TODO: Call login activity for convenience				
             }
         }
 

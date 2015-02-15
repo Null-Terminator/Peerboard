@@ -116,9 +116,16 @@ public class DBCompare {
 			String query1			= "SELECT MAX(u_id) max FROM users";
 			Statement stmt 			= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs			= stmt.executeQuery(query1);
+			
 			int u_id = 0;
-			int count = 0;;
-			int veriPIN = rand
+			int count = 0;
+			int min = 1000;
+			int max = 9999;
+			int veriPIN = 0307;
+
+			//Random r = new Random();
+			//int veriPIN = r.nextInt(max - min + 1) + min;
+			
 			
 			while (rs.next())
 			{
@@ -126,8 +133,10 @@ public class DBCompare {
 			}
 			
 			String query2			= "SELECT COUNT(*) c FROM users WHERE EMAIL = ?";
-			Statement stmt2			= conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs2			= stmt2.executeQuery(query2);
+			PreparedStatement stmt2 	= conn.prepareStatement(query2);
+            stmt2.setString(1, email);
+			
+			ResultSet rs2			= stmt2.executeQuery();
 			
 			while (rs2.next())
 			{
@@ -138,6 +147,7 @@ public class DBCompare {
 				return -1;
 				//TODO: Go back to SignUpActivity and set -1 to the corresponding error
 			}
+			
 
             String insrt	        = "INSERT INTO users (U_ID, EMAIL, FNAME, LNAME, SALT, PWD, VERIPIN) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt3 	= conn.prepareStatement(insrt);
@@ -147,6 +157,7 @@ public class DBCompare {
 			stmt3.setString(4, lname);
 			stmt3.setString(5, salt);
 			stmt3.setString(6, pword);
+			stmt3.setInt(7, veriPIN);
 
             stmt3.executeUpdate();
 			conn.commit();
@@ -169,10 +180,12 @@ public class DBCompare {
 
                 se = se.getNextException();
             }
+			return -4;
         }
         catch (Exception e)
         {
             e.printStackTrace();
+			return -4;
         }
 
         finally
@@ -181,31 +194,10 @@ public class DBCompare {
                 conn.close();
 
         }
+		
+		//TODO: Send an email to user with the veriPIN using Richa's code
 
-        if(uEmail == ""){
-            //TODO: Send them back saying email address is not registered
-            return -1;
-        }
-
-        try {
-			String dbpwd = Sha1Hash.SHA1(uSalt + uPwd);
-			if(!dbpwd.equals(pwd)){
-				//#TODO: Send back saying wrong password
-				return -2;
-			}
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-
-        if(uVeriPIN != 0){
-            //#TODO: Send them to verification page
-            return uVeriPIN;
-        }
-
-        //#TODO: Successful login, handle it at activity_login
+        //TODO: Successful signup, handle it at SignUpActivity
 		return 0;
     }
 }
