@@ -121,10 +121,9 @@ public class DBCompare {
 			int count = 0;
 			int min = 1000;
 			int max = 9999;
-			int veriPIN = 0307;
 
-			//Random r = new Random();
-			//int veriPIN = r.nextInt(max - min + 1) + min;
+			Random r = new Random();
+			int veriPIN = r.nextInt(max - min + 1) + min;
 			
 			
 			while (rs.next())
