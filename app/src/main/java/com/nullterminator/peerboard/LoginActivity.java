@@ -41,6 +41,7 @@ import java.util.List;
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 	int veriPIN = 0;
 	String name = "";
+	//Comment 1 - Feb 18 6:15pm
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
