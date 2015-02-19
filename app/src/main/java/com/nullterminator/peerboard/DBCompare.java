@@ -1,7 +1,6 @@
 package com.nullterminator.peerboard;
 
 import java.sql.*;
-import oracle.*;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
