@@ -44,6 +44,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 	//Comment 1 - Feb 18 6:15pm
     //Comment 2 - Feb 18 6:18pm
     //Comment 3 - Feb 18 9:19pm
+    //Comment 4 - Feb 22 9:47pm
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
