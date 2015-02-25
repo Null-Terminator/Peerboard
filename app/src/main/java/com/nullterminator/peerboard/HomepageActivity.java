@@ -30,7 +30,7 @@ public class HomepageActivity extends ActionBarActivity {
     //Example profile of user
     String NAME = "Null Terminator";
     String EMAIL = "null.terminator@gmail.com";
-    int PROFILE = R.drawable.uoft_launcher;
+    int PROFILE = R.drawable.ic_launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
