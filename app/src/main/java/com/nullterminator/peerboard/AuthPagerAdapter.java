@@ -18,7 +18,7 @@ public class AuthPagerAdapter extends FragmentPagerAdapter {
 			case 0:
 				return new LoginFragment();
 			case 1:
-				return new SignupFragment();
+				return new SignUpFragment();
 		}
 
         return null;
