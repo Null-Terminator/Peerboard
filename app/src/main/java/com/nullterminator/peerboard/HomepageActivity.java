@@ -10,6 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
+import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import com.etsy.android.grid.StaggeredGridView;
 
 /*
 * @author Sanjana
@@ -17,6 +23,7 @@ import android.view.View;
 */
 public class HomepageActivity extends ActionBarActivity {
     private Toolbar toolbar;
+    StaggeredGridView gridView;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
@@ -32,12 +39,31 @@ public class HomepageActivity extends ActionBarActivity {
     String EMAIL = "null.terminator@gmail.com";
     int PROFILE = R.drawable.uoft_launcher;
 
+    //Example Grid Strings
+    static final String[] GRID_TEXT = new String[] {"A simple enough requirement but on Android things aren’t always that simple. We wanted these cards in a multi-column grid, with a column count that changes with device orientation while keeping grid position. ", "Ad2","A simple enough requirement ", "A simple enough requirement but on Android things aren’t " };
+    static final String[] GRID_COLORS = new String[]{"5dbede","a0294c","fce17e", "91e374"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+
+        gridView = (StaggeredGridView) findViewById(R.id.gridView);
+        gridView.setAdapter(new GridAdapter(this, GRID_TEXT, GRID_COLORS));
+
+        gridView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        ((TextView) v.findViewById(R.id.grid_item_label))
+                                .getText(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
