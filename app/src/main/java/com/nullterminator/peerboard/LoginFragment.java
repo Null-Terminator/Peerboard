@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     int veriPIN = 0;
 	String name = "";
-	private Toolbar toolbar;
+	//private Toolbar toolbar;
 	View view;
 	//Comment 1 - Feb 18 6:15pm
     //Comment 2 - Feb 18 6:18pm
@@ -67,8 +67,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private View mProgressView;
     private View mLoginFormView;
 	protected Activity mActivity;
-    private ImageView mCamera;
-    private TextView intro;
 
     @Override
     public void onAttach(Activity act)
@@ -142,7 +140,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 	
 	private void populateAutoComplete() {
-        getLoaderManager().initLoader(0, null, view);
+        //getLoaderManager().initLoader(0, null, view); //TODO: figure out
     }
 
 
@@ -201,7 +199,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             // perform the user login attempt.
             showProgress(true);
 			try {
-				Context context = getApplicationContext();
+				Context context = getActivity();
 				CharSequence text = "Will attempt jdbc now";
 				int duration = Toast.LENGTH_SHORT;
 
@@ -263,7 +261,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(view,
+        return new CursorLoader(getActivity(),
 								// Retrieve data rows for the device user's 'profile' contact.
 								Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
 													 ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
@@ -276,7 +274,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 								// Show primary email addresses first. Note that there won't be
 								// a primary email address if the user hasn't specified one.
 								ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-    }
+    } //TODO: Figure this out
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
@@ -309,7 +307,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-			new ArrayAdapter<String>(LoginFragment.view,
+			new ArrayAdapter<String>(getActivity(),
 									 android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -384,16 +382,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             showProgress(false);
 			//TODO: need to understand this part and write the post execute part.
 
-            if (success) {
-				Context context = getApplicationContext();
+            if (success&&(getActivity()!=null)) {
+				Context context = getActivity();
 				CharSequence text = "Successfully logged in, PIN = " + veriPIN;
 				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
-                finish();
+                getActivity().finish();
             } else {
-				Context context = getApplicationContext();
+				Context context = getActivity();
 				CharSequence text = "Email invalid/not registered " + veriPIN;
 				int duration = Toast.LENGTH_SHORT;
 
