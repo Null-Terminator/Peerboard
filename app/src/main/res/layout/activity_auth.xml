@@ -4,13 +4,21 @@ android:orientation="vertical"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent">
 
-<include
-	android:id="@+id/tool_bar"
-	layout="@layout/tool_bar"/>
+	<include
+		android:id="@+id/authtoolbar"
+		layout="@layout/tool_bar"/>
 
-<android.support.v4.view.ViewPager
-	android:id="@+id/authpager"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content"/>
+    <com.android4devs.slidingtab.SlidingTabLayout
+        android:id="@+id/authtabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:background="@color/ColorPrimary"/>
+
+	<android.support.v4.view.ViewPager
+		android:id="@+id/authpager"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"/>
 
 </LinearLayout>
