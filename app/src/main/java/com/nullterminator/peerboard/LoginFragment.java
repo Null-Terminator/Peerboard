@@ -20,6 +20,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.*;
+import android.support.v4.content.*;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -90,7 +92,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_login, container, false);
+        view = inflater.inflate(R.layout.tab_login, container, false);
 
 		/*toolbar = (Toolbar) view.findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         view.setSupportActionBar(toolbar);*/ //TODO: Make materiYOLO work later
@@ -140,7 +142,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 	
 	private void populateAutoComplete() {
-        //getLoaderManager().initLoader(0, null, view); //TODO: figure out
+        //getLoaderManager().initLoader(0, null, getActivity()); //TODO: figure out
     }
 
 
@@ -215,7 +217,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@")&&email.contains("mail.utoronto.ca");
+        return email.contains("@mail.utoronto.ca");
     }
 
     private boolean isPasswordValid(String password) {
