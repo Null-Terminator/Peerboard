@@ -234,7 +234,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@")&&email.contains("mail.utoronto.ca");
+        return email.contains("@mail.utoronto.ca");
     }
 
     private boolean isPasswordValid(String password) {
