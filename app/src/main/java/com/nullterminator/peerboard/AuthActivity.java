@@ -27,7 +27,7 @@ public class AuthActivity extends ActionBarActivity {
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbar = (Toolbar) findViewById(R.id.authtoolbar);
         setSupportActionBar(toolbar);
 
 

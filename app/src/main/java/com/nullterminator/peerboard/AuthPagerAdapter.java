@@ -30,7 +30,7 @@ public class AuthPagerAdapter extends FragmentStatePagerAdapter {
             LoginFragment logintab = new LoginFragment();
             return logintab;
         }
-        else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
+        else             // As we are having 2 tabs if the position is not 0 it must be 1 so we are returning second tab
         {
             SignUpFragment signuptab = new SignUpFragment();
             return signuptab;
