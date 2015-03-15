@@ -16,8 +16,8 @@ public class AuthActivity extends ActionBarActivity {
     ViewPager authpager;
     AuthPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Login","Sign Up"};
-    int Numboftabs =2;
+    CharSequence Titles[] = {"Login","Sign Up"};
+    int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
