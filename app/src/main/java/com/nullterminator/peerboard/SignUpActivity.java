@@ -3,7 +3,6 @@ package com.nullterminator.peerboard;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -15,6 +14,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,9 +39,10 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class SignUpActivity extends ActionBarActivity implements LoaderCallbacks<Cursor> {
 	int reg = 0;
 	String name = "";
+    private Toolbar toolbar;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -57,7 +59,9 @@ public class SignUpActivity extends Activity implements LoaderCallbacks<Cursor> 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.tab_signup);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        setSupportActionBar(toolbar);
 
         // Set up the signup form.
 		mFirstNameView = (EditText) findViewById(R.id.fname);

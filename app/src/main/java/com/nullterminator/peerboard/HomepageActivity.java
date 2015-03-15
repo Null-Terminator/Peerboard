@@ -1,6 +1,7 @@
 package com.nullterminator.peerboard;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.appcompat.*;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -37,7 +38,7 @@ public class HomepageActivity extends ActionBarActivity {
     //Example profile of user
     String NAME = "Null Terminator";
     String EMAIL = "null.terminator@gmail.com";
-    int PROFILE = R.drawable.uoft_launcher;
+    int PROFILE = R.drawable.ic_launcher;
 
     //Example Grid Strings
     static final String[] GRID_TEXT = new String[] {"A simple enough requirement but on Android things aren’t always that simple. We wanted these cards in a multi-column grid, with a column count that changes with device orientation while keeping grid position. ", "Ad2","A simple enough requirement ", "A simple enough requirement but on Android things aren’t " };
