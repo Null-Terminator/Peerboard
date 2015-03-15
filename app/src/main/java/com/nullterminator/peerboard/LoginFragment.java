@@ -10,8 +10,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.Loader;
 import android.content.Context;
+import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -23,6 +24,7 @@ import android.support.v4.app.*;
 import android.support.v4.content.*;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.*;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -392,6 +394,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
                 getActivity().finish();
+				
+				Intent i = new Intent(getActivity(), HomepageActivity.class);
+				startActivity(i);
+				//getActivity().setContentView(R.layout.activity_homepage);
             } else {
 				Context context = getActivity();
 				CharSequence text = "Email invalid/not registered " + veriPIN;
