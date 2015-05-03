@@ -40,7 +40,7 @@ public class HomepageActivity extends ActionBarActivity {
     int PROFILE = R.drawable.uoft_launcher;
 
     //Example Grid Strings
-    static final String[] GRID_TEXT = new String[] {"A simple enough requirement but on Android things aren’t always that simple. We wanted these cards in a multi-column grid, with a column count that changes with device orientation while keeping grid position. ", "Ad2","A simple enough requirement ", "A simple enough requirement but on Android things aren’t " };
+    static final String[] GRID_TEXT = new String[] {"A simple enough requirement but on Android things aren’t always that simple. We wanted these cards in a multi-column grid, with a column count that changes with device orientation while keeping grid position. ", "This is Ad blaaahhhccurate ","A simple enough requirement ", "A simple enough requirement but on Android things aren’t " };
     static final String[] GRID_COLORS = new String[]{"5dbede","a0294c","fce17e", "91e374"};
 
     @Override
