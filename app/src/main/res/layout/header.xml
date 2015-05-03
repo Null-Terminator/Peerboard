@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="178dp"
-    android:background="@drawable/ic_launcher"
+    android:background="#002A5D"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:text="Null Terminator"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:text="null.terminator@gmail.com"
@@ -45,7 +45,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/uoft_launcher"
+        android:src="@drawable/ic_launcher"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="38dp"
         android:id="@+id/circleView"
